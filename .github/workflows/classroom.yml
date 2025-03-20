@@ -27,12 +27,12 @@ jobs:
         expected-output: 2 passed
         timeout: 1
         max-score: 10
-    - name: Autograding Reporter
-      uses: classroom-resources/autograding-grading-reporter@v1
-      # For more information on this runner, see the documentation at https://github.com/classroom-resources/autograding-grading-reporter
-      # To output the results of the tests, you can use the
-      # autograding-grading-reporter action like this:
-      env:
-        FORGE-TEST_RESULTS: "${{steps.run-tests.outputs.result}}"
-      with:
-          runners: run-tests,
+    # - name: Autograding Reporter
+      # uses: classroom-resources/autograding-grading-reporter@v1
+      # # For more information on this runner, see the documentation at https://github.com/classroom-resources/autograding-grading-reporter
+      # # To output the results of the tests, you can use the
+      # # autograding-grading-reporter action like this:
+      # env:
+      #   FORGE-TEST_RESULTS: "${{steps.run-tests.outputs.result}}"
+      # with:
+      #     runners: run-tests,
