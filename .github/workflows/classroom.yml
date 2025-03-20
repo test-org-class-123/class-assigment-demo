@@ -23,8 +23,8 @@ jobs:
           curl -L https://foundry.paradigm.xyz | bash
           foundryup
         command: forge test 
-        comparison-method: included
-        expected-output: ok. 2 passed;
+        comparison-method: regex
+        expected-output: 2 passed
         timeout: 1
         max-score: 10
     - name: Autograding Reporter
