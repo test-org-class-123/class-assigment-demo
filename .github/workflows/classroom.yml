@@ -15,37 +15,24 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Run tests
-      uses: classroom-resources/autograding-io-grader@v1
-        with:
-          test-name: Forge test
-          id: forge-test
-          setup-command:|
-            curl -L https://foundry.paradigm.xyz | bash
-            foundryup
-          command: forge test 
-          comparison-method: included
-          expected-output: ok. 2 passed;
-          timeout: 1
-      # This is where you place your autograding tests
-      # For more information on this runner, see the documentation at: https://github.com/classroom-resources/autograding-io-grader
-      #
-      # For example, you could run a test suite like this:
-      # - name: Run tests
-      #   uses: classroom-resources/autograding-io-grader@v1
-      #     with:
-      #       test-name: Addition Test
-      #       id: addition-test
-      #       command: "./bin/add.sh"
-      #       input: 1 2
-      #       expected-output: 3
-      #       comparison-method: exact
-      #       timeout: 10
+      uses: 'classroom-resources/autograding-io-grader@v1'
+      id: forge-test
+      with:
+        test-name: Forge test
+        setup-command: |
+          curl -L https://foundry.paradigm.xyz | bash
+          foundryup
+        command: forge test 
+        comparison-method: included
+        expected-output: ok. 2 passed;
+        timeout: 1
+        max-score: 10
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       # For more information on this runner, see the documentation at https://github.com/classroom-resources/autograding-grading-reporter
       # To output the results of the tests, you can use the
       # autograding-grading-reporter action like this:
-      # env:
-      # ADDITION-TEST_RESULTS: "${{ steps.addition - test.outputs.result }}"
-      #     with:
-      #         runners: addition-test
+      env:
+        FORGE-TEST_RESULTS: "${{steps.forge-test.outputs.result}}"
+      with:
+          runners: forge-test
