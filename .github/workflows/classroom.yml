@@ -35,4 +35,4 @@ jobs:
       env:
         FORGE-TEST_RESULTS: "${{steps.run-tests.outputs.result}}"
       with:
-          runners: run-tests
+          runners: run-tests,
