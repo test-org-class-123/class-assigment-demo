@@ -16,13 +16,13 @@ jobs:
       uses: actions/checkout@v4
     - name: Run tests
       uses: 'classroom-resources/autograding-io-grader@v1'
-      id: forge-test
+      id: run-tests
       with:
         test-name: Forge test
         setup-command: |
           curl -L https://foundry.paradigm.xyz | bash
           foundryup
-        command: forge test 
+        command: forge test
         comparison-method: regex
         expected-output: 2 passed
         timeout: 1
@@ -33,6 +33,6 @@ jobs:
       # To output the results of the tests, you can use the
       # autograding-grading-reporter action like this:
       env:
-        FORGE-TEST_RESULTS: "${{steps.forge-test.outputs.result}}"
+        FORGE-TEST_RESULTS: "${{steps.run-tests.outputs.result}}"
       with:
-          runners: forge-test
+          runners: run-tests
